@@ -5,13 +5,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Results {
-    private final List<checkResult> results = new LinkedList<>();
+    private static final List<checkResult> results = new LinkedList<>();
 
-    public List<checkResult> getResults() {
+    public static List<checkResult> getResults() {
         return results;
     }
 
-    public void addCheckResult(checkResult result){
+    public static void addCheckResult(checkResult result){
         results.add(result);
     }
 
