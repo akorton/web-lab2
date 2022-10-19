@@ -16,7 +16,6 @@ public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String> query = parseQuerystring(req.getQueryString());
-        log(req.getRequestURL().toString());
         PrintWriter writer = resp.getWriter();
         writer.write("<html>");
         writer.write("<body>");
