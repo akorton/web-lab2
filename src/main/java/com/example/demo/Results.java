@@ -1,14 +1,11 @@
 package com.example.demo;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Results {
-    private final List<checkResult> results;
-
-    public Results(){
-        results = new LinkedList<>();
-    }
+    private final List<checkResult> results = new LinkedList<>();
 
     public List<checkResult> getResults() {
         return results;
@@ -18,18 +15,14 @@ public class Results {
         results.add(result);
     }
 
-    public static class checkResult{
-        private final float x;
-        private final float y;
-        private final float r;
-        private final String in;
+    public static class checkResult implements Serializable {
+        private float x;
+        private float y;
+        private float r;
+        private String in;
 
-        public checkResult(float x, float y, float r, String in){
-            this.x = x;
-            this.y = y;
-            this.r = r;
-            this.in = in;
-        }
+        public checkResult(){};
+
 
         public float getR() {
             return r;
@@ -45,6 +38,22 @@ public class Results {
 
         public String getIn() {
             return in;
+        }
+
+        public void setIn(String in) {
+            this.in = in;
+        }
+
+        public void setR(float r) {
+            this.r = r;
+        }
+
+        public void setX(float x) {
+            this.x = x;
+        }
+
+        public void setY(float y) {
+            this.y = y;
         }
     }
 }
