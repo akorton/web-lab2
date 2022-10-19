@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AreaCheckServlet extends HttpServlet {
@@ -15,6 +16,7 @@ public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String> query = parseQuerystring(req.getQueryString());
+        log(req.getRequestURL().toString());
         PrintWriter writer = resp.getWriter();
         writer.write("<html>");
         writer.write("<body>");
@@ -29,11 +31,30 @@ public class AreaCheckServlet extends HttpServlet {
             checkResult.setX(x);
             checkResult.setY(y);
             Results.addCheckResult(checkResult);
+            List<Results.CheckResult> results = Results.getResults();
+            writer.write("<table align=\"center\" cellpadding=\"5\" cellspacing=\"10\" border=\"2\" width=\"100%\">");
+            writer.write(" <tr>\n" +
+                    "                <td colspan=\"4\" align=\"right\"><button onclick=\"redirectToMainPage()\">Back</button></td>\n" +
+                    "            </tr>");
+            writer.write("<tr><td>X</td><td>Y</td><td>R</td><td>Result</td></tr>");
+            for (Results.CheckResult currentResult: results){
+                float curX = currentResult.getX();
+                float curY = currentResult.getY();
+                float curR = currentResult.getR();
+                String curResult = currentResult.getIn();
+                writer.write(String.format("<tr><td>%f</td><td>%f</td><td>%f</td><td>%s</td></tr>", curX, curY, curR, curResult));
+            }
+            writer.write("</table>");
         } catch (NumberFormatException | NullPointerException e) {
             writer.write("Invalid arguments.");
         } finally {
             writer.write("</body>");
             writer.write("</html>");
+            writer.write("<script>let redirectToMainPage = ()=>{\n" +
+                    "let hrefArray = window.location.href.split('/');\n" +
+                    "let newArray = [...hrefArray.splice(0, hrefArray.indexOf('lab2')+1), 'controller'];" +
+                    "        window.location.href = newArray.join(\"/\");\n" +
+                    "    }</script>");
         }
     }
 
