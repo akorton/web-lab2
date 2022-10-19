@@ -13,19 +13,17 @@
 
         .header {
             padding-top: 10px;
-            padding-bottom: 30px;
+            padding-bottom: 10px;
             font-size: 30px;
             color: yellow;
             background-color: black;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        }
-
-        .header {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 50px;
+            gap: 10px;
         }
 
         .content {
