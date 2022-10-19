@@ -1,3 +1,4 @@
+<%@ page import="com.example.demo.Results" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -10,16 +11,9 @@
             margin: 0px;
         }
 
-        table {
-            width: 100%;
-            height: 100vh;
-            font-size: 20px;
-        }
-
-        .header td {
-            text-align: center;
+        .header {
             padding-top: 10px;
-            padding-bottom: 10px;
+            padding-bottom: 30px;
             font-size: 30px;
             color: yellow;
             background-color: black;
@@ -27,95 +21,94 @@
         }
 
         .header {
-            width: 100%;
-            height: 15%;
-        }
-        .header td p{
-            margin: 0;
-            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
         }
 
         .content {
-            width: 100%;
-            height: 50%;
-        }
-
-        .input-el {
-            width: 100%;
-            height: 7%;
-        }
-
-        .footer {
-            height: 14%;
-        }
-
-        .input-el td, td#submit {
-            padding-left: 20%;
-
-        }
-        .content td{
-            text-align: center;
-        }
-
-        .x button {
-            border-radius: 50%;
-            padding: 10px;
-            width: 40px;
-            border-style: solid;
-            border-color: black;
-            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 100px;
         }
         .content #canvas {
             width: 500px;
             height: 500px;
         }
+        .content, .input{
+            padding-left: 20%;
+        }
+
+        .input {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 20px;
+        }
 
     </style>
 </head>
 <body>
-<table>
-    <tr class="header">
-        <td colspan="2"><p>Кортыш Андрей Олегович</p> <span>группа P32151</span> <span>Вариант 19080</span></td>
-    </tr>
-    <tr class="content">
-        <td><canvas id="canvas"></canvas></td>
-    </tr>
-    <tr class="input-el x">
-        <td>
-            <span>Изменение X: </span>
-            <select name="x" form="data" id="x_select">
-                <option value="-2">-2</option>
-                <option value="-1.5">-1.5</option>
-                <option value="-1">-1</option>
-                <option value="-0.5">-0.5</option>
-                <option value="0" selected>0</option>
-                <option value="0.5">0.5</option>
-                <option value="1">1</option>
-                <option value="1.5">1.5</option>
-                <option value="2">2</option>
-            </select>
-        </td>
-    </tr>
-    <tr class="input-el">
-        <td><span>Изменение Y: </span><input type="text" form="data" id="y" name="y" value="0"></td>
-    </tr>
-    <tr class="input-el">
-        <td>
-            <span>Изменение R: </span>
-            <input type="radio" checked="true" name="r" id="r1" form="data" value="1"><label for="r1">1</label>
-            <input type="radio" name="r" id="r2" form="data" value="1.5"><label for="r2">1.5</label>
-            <input type="radio" name="r" id="r3" form="data" value="2"><label for="r3">2</label>
-            <input type="radio" name="r" id="r4" form="data" value="2.5"><label for="r4">2.5</label>
-            <input type="radio" name="r" id="r5" form="data" value="3"><label for="r5">3</label>
-        </td>
-    </tr>
-    <tr>
-        <td id="submit">
+<div>
+    <div class="header">
+        <div>Кортыш Андрей Олегович</div> <div>группа P32151 Вариант 19080</div>
+    </div>
+    <div class="content">
+        <canvas id="canvas"></canvas>
+            <table align="center" cellpadding="5" cellspacing="10" border="2">
+                <tr>
+                    <td>X</td>
+                    <td>Y</td>
+                    <td>R</td>
+                    <td>Result</td>
+                </tr>
+                <% for (Results.CheckResult checkResult: Results.getResults()){%>
+                <tr>
+                <td><%=checkResult.getX()%></td>
+                <td><%=checkResult.getY()%></td>
+                <td><%=checkResult.getR()%></td>
+                <td><%=checkResult.getIn()%></td>
+                </tr>
+                <%}%>
+            </table>
+    </div>
+    <div class="input">
+        <div class="x">
+                <span>Изменение X: </span>
+                <select name="x" form="data" id="x_select">
+                    <option value="-2">-2</option>
+                    <option value="-1.5">-1.5</option>
+                    <option value="-1">-1</option>
+                    <option value="-0.5">-0.5</option>
+                    <option value="0" selected>0</option>
+                    <option value="0.5">0.5</option>
+                    <option value="1">1</option>
+                    <option value="1.5">1.5</option>
+                    <option value="2">2</option>
+                </select>
+        </div>
+        <div>
+            <span>Изменение Y: </span><input type="text" form="data" id="y" name="y" value="0">
+        </div>
+        <div>
+                <span>Изменение R: </span>
+                <input type="radio" checked="true" name="r" id="r1" form="data" value="1"><label for="r1">1</label>
+                <input type="radio" name="r" id="r2" form="data" value="1.5"><label for="r2">1.5</label>
+                <input type="radio" name="r" id="r3" form="data" value="2"><label for="r3">2</label>
+                <input type="radio" name="r" id="r4" form="data" value="2.5"><label for="r4">2.5</label>
+                <input type="radio" name="r" id="r5" form="data" value="3"><label for="r5">3</label>
+        </div>
+        <div>
             <button type="submit" form="data">Submit</button>
-        </td>
-    </tr>
-    <tr class="footer"></tr>
-</table>
+        </div>
+    </div>
+    <div class="footer"></div>
+</div>
 <form id="data" method="get" action="controller" target="_blank"></form>
 </body>
 <script src="/lab2/js/script.js"></script>
