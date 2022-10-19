@@ -49,7 +49,7 @@
             height: 14%;
         }
 
-        .input-el td, .content td, td#reset {
+        .input-el td, td#reset {
             padding-left: 20%;
 
         }
