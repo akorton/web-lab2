@@ -48,6 +48,11 @@
             gap: 10px;
             font-size: 20px;
         }
+        table{
+            overflow-y:scroll;
+            height:500px;
+            display:block;
+        }
 
     </style>
 </head>
@@ -60,10 +65,10 @@
         <canvas id="canvas"></canvas>
             <table align="center" cellpadding="5" cellspacing="10" border="2">
                 <tr>
-                    <td>X</td>
-                    <td>Y</td>
-                    <td>R</td>
-                    <td>Result</td>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>R</th>
+                    <th>Result</th>
                 </tr>
                 <% for (Results.CheckResult checkResult: Results.getResults()){%>
                 <tr>

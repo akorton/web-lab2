@@ -35,7 +35,7 @@ public class AreaCheckServlet extends HttpServlet {
             writer.write(" <tr>\n" +
                     "                <td colspan=\"4\" align=\"right\"><button onclick=\"redirectToMainPage()\">Back</button></td>\n" +
                     "            </tr>");
-            writer.write("<tr><td>X</td><td>Y</td><td>R</td><td>Result</td></tr>");
+            writer.write("<tr><th>X</th><th>Y</th><th>R</th><th>Result</th></tr>");
             for (Results.CheckResult currentResult: results){
                 float curX = currentResult.getX();
                 float curY = currentResult.getY();
