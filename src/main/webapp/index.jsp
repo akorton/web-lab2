@@ -118,5 +118,5 @@
 <form id="data" method="get" action="server.php" target="_blank"></form>
 <form method="post" action="server.php" target="_blank" id="reset_form"></form>
 </body>
-<script src="js/script.js"></script>
+<script src="/lab2/js/script.js"></script>
 </html>
