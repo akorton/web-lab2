@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>First lab</title>
+    <title>Second lab</title>
     <style>
 
         body{
