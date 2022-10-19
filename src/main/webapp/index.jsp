@@ -80,18 +80,20 @@
     <tr class="content">
         <td><canvas id="canvas"></canvas></td>
     </tr>
-    <tr class="input-el x" id="x_buttons">
+    <tr class="input-el x">
         <td>
             <span>Изменение X: </span>
-            <input type="button" value="-4">
-            <input type="button" value="-3">
-            <input type="button" value="-2">
-            <input type="button" value="-1">
-            <input type="button" value="0">
-            <input type="button" value="1">
-            <input type="button" value="2">
-            <input type="button" value="3">
-            <input type="button" value="4">
+            <select name="x" form="data" id="x_select">
+                <option value="-2">-2</option>
+                <option value="-1.5">-1.5</option>
+                <option value="-1">-1</option>
+                <option value="-0.5">-0.5</option>
+                <option value="0" selected>0</option>
+                <option value="0.5">0.5</option>
+                <option value="1">1</option>
+                <option value="1.5">1.5</option>
+                <option value="2">2</option>
+            </select>
         </td>
     </tr>
     <tr class="input-el">
