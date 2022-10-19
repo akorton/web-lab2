@@ -75,7 +75,7 @@
 <body>
 <table>
     <tr class="header">
-        <td colspan="2"><p>Кортыш Андрей Олегович</p> <span>группа P32151</span> <span>Вариант 1908</span></td>
+        <td colspan="2"><p>Кортыш Андрей Олегович</p> <span>группа P32151</span> <span>Вариант 19080</span></td>
     </tr>
     <tr class="content">
         <td><canvas id="canvas"></canvas></td>
