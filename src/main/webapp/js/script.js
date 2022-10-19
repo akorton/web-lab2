@@ -4,9 +4,9 @@ const width = canvas.clientWidth;
 const height = canvas.clientHeight;
 canvas.width = width;
 canvas.height = height;
-const maxCoord = 4;
-const offsetX = 50;
-const offsetY = 50;
+const maxCoord = 5;
+const offsetX = 10;
+const offsetY = 10;
 const pointSize = 5;
 const steps = {'x': (width - offsetX) / (2*maxCoord), 'y': (height - offsetY) / (2*maxCoord)};
 const origin = {'x': offsetX / 2 + maxCoord * steps['x'], 'y': offsetY / 2 + maxCoord * steps['y']};
@@ -24,10 +24,10 @@ let y = 0;
 let r = 1;
 
 let setUp = ()=>{
-    ctx.moveTo(origin.x - steps.x * 4, origin.y);
-    ctx.lineTo(origin.x + steps.x * 4, origin.y);
-    ctx.moveTo(origin.x, origin.y - steps.y * 4);
-    ctx.lineTo(origin.x, origin.y + steps.y * 4);
+    ctx.moveTo(origin.x - steps.x * maxCoord, origin.y);
+    ctx.lineTo(origin.x + steps.x * maxCoord, origin.y);
+    ctx.moveTo(origin.x, origin.y - steps.y * maxCoord);
+    ctx.lineTo(origin.x, origin.y + steps.y * maxCoord);
     ctx.stroke();
 };
 
