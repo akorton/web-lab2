@@ -19,4 +19,12 @@
         <servlet-name>controller</servlet-name>
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>areaCheck</servlet-name>
+        <servlet-class>com.example.demo.AreaCheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>areaCheck</servlet-name>
+        <url-pattern>/command/checkArea</url-pattern>
+    </servlet-mapping>
 </web-app>

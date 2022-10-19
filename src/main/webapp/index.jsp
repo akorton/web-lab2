@@ -49,7 +49,7 @@
             height: 14%;
         }
 
-        .input-el td, td#reset {
+        .input-el td, td#submit {
             padding-left: 20%;
 
         }
@@ -100,23 +100,21 @@
     <tr class="input-el">
         <td>
             <span>Изменение R: </span>
-            <input type="radio" checked="true" name="radius" id="r1" form="data" value="1"><label for="r1">1</label>
-            <input type="radio" name="radius" id="r2" form="data" value="1.5"><label for="r2">1.5</label>
-            <input type="radio" name="radius" id="r3" form="data" value="2"><label for="r3">2</label>
-            <input type="radio" name="radius" id="r4" form="data" value="2.5"><label for="r4">2.5</label>
-            <input type="radio" name="radius" id="r5" form="data" value="3"><label for="r5">3</label>
+            <input type="radio" checked="true" name="r" id="r1" form="data" value="1"><label for="r1">1</label>
+            <input type="radio" name="r" id="r2" form="data" value="1.5"><label for="r2">1.5</label>
+            <input type="radio" name="r" id="r3" form="data" value="2"><label for="r3">2</label>
+            <input type="radio" name="r" id="r4" form="data" value="2.5"><label for="r4">2.5</label>
+            <input type="radio" name="r" id="r5" form="data" value="3"><label for="r5">3</label>
         </td>
     </tr>
     <tr>
-        <td id="reset">
-            <button type="submit" name="reset" value="reset" form="reset_form">Reset</button>
+        <td id="submit">
             <button type="submit" form="data">Submit</button>
         </td>
     </tr>
     <tr class="footer"></tr>
 </table>
-<form id="data" method="get" action="server.php" target="_blank"></form>
-<form method="post" action="server.php" target="_blank" id="reset_form"></form>
+<form id="data" method="get" action="controller" target="_blank"></form>
 </body>
 <script src="/lab2/js/script.js"></script>
 </html>
