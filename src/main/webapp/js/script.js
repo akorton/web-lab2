@@ -11,11 +11,12 @@ const pointSize = 5;
 const steps = {'x': (width - offsetX) / (2*maxCoord), 'y': (height - offsetY) / (2*maxCoord)};
 const origin = {'x': offsetX / 2 + maxCoord * steps['x'], 'y': offsetY / 2 + maxCoord * steps['y']};
 const radiusButtons = document.getElementsByName('r');
-const yButton = document.getElementById('y');
-const xSelect = document.getElementById('x_select');
+const yButton = $('#y')[0];
+const xSelect = $('#x_select')[0];
 let x = 0;
 let y = 0;
 let r = 1;
+let points = [];
 
 let setUp = ()=>{
     ctx.moveTo(origin.x - steps.x * maxCoord, origin.y);
@@ -25,6 +26,11 @@ let setUp = ()=>{
     ctx.stroke();
 };
 
+let getValidHref = (toAdd)=>{
+    let current = window.location.href.split("/");
+    return [...current.slice(0, current.indexOf("lab2" + 1)), toAdd].join("/");
+}
+
 let draw = (r)=>{
     ctx.clearRect(0, 0, width, height);
     setUp();
@@ -32,11 +38,10 @@ let draw = (r)=>{
     drawRect(r);
     drawTriangle(r);
     drawQuaterCircle(r);
-    ctx.beginPath();
 };
 let drawRect = (r)=>{
     ctx.fillRect(origin.x, origin.y, r*steps.x, r*steps.y);
-}
+};
 let drawTriangle = (r)=>{
     ctx.beginPath();
     ctx.moveTo(origin.x, origin.y);
@@ -44,28 +49,82 @@ let drawTriangle = (r)=>{
     ctx.lineTo(origin.x, origin.y - r*steps.y / 2);
     ctx.closePath();
     ctx.fill();
-}
+    ctx.stroke();
+};
 
 let drawQuaterCircle = (r)=>{
     ctx.beginPath();
     ctx.moveTo(origin.x, origin.y);
     ctx.arc(origin.x, origin.y, r*steps.x/2, Math.PI * 3/2, 0);
     ctx.fill();
-}
+    ctx.stroke();
+};
 
-let drawPoint = (x, y)=>{
-    draw(r);
-    ctx.fillStyle = '#FF0000';
+let drawPoint = (x, y, checkResult)=>{
+    ctx.fillStyle = checkResult ? '#00FF00' : '#FF0000';
     ctx.beginPath();
     ctx.arc(origin.x + x*steps.x, origin.y - y*steps.y, pointSize, 0, Math.PI * 2);
     ctx.fill();
+    ctx.stroke();
+};
+
+let drawPoints = ()=>{
+    console.log(points);
+    draw(r);
+    for (let point of points){
+        drawPoint(point.x, point.y, point.in);
+    }
+    drawPoint(x, y, false);
     ctx.beginPath();
+};
+
+let addToTable = ()=>{
+    const table = $('tbody')[0];
+    for (const child of [...table.children].slice(1)){
+        table.removeChild(child);
+    }
+    for (const point of points){
+        let x = point.x;
+        let y = point.y;
+        let r = point.r;
+        let check = point.in;
+        let tr = document.createElement("tr");
+        let tdX = document.createElement("td");
+        tdX.innerText = x;
+        let tdY = document.createElement("td");
+        tdY.innerText = y;
+        let tdR = document.createElement("td");
+        tdR.innerText = r;
+        let tdCheck = document.createElement("td");
+        tdCheck.innerText = check;
+        tr.appendChild(tdX);
+        tr.appendChild(tdY);
+        tr.appendChild(tdR);
+        tr.appendChild(tdCheck);
+        table.appendChild(tr);
+    }
+}
+
+let getPoints = async ()=>{
+    return $.ajax({
+        url: getValidHref("command/getPoints"),
+        method: "get",
+        success: (data)=>{
+            points =  JSON.parse(data);
+            updateAfterGetPoints();
+        }
+    })
+}
+
+let updateAfterGetPoints = ()=>{
+    addToTable();
+    drawPoints();
 }
 
 radiusButtons.forEach((btn)=>{
     btn.addEventListener('click', (e)=>{
         r = btn.value;
-        drawPoint(x, y);
+        drawPoints();
     });
 });
 
@@ -79,7 +138,7 @@ yButton.addEventListener('input', (e)=>{
     }
     if (yButton.value != '-') {
         y = +yButton.value;
-        drawPoint(x, y);
+        drawPoints();
     }
 });
 
@@ -87,12 +146,12 @@ xSelect.addEventListener("change", (e)=>{
     for (let option of xSelect.options){
         if (option.selected){
             x = +option.value;
-            drawPoint(x, y);
+            drawPoints();
         }
     }
-})
+});
 
-canvas.addEventListener("click", (e)=>{
+canvas.addEventListener("click", async (e) => {
     let canvasX = e.offsetX;
     let canvasY = e.offsetY;
     let realX = (canvasX - origin.x) / steps.x;
@@ -105,13 +164,14 @@ canvas.addEventListener("click", (e)=>{
         child.hidden = true;
         child.selected = true;
         xSelect.appendChild(child);
-        drawPoint(realX, y);
         form.submit();
         xSelect.removeChild(child);
+        await getPoints();
     } else {
         alert("Invalid y value");
     }
-})
-
-
-drawPoint(x, y);
+});
+drawPoints();
+setInterval(async () => {
+    await getPoints();
+}, 2000);

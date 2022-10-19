@@ -27,4 +27,12 @@
         <servlet-name>areaCheck</servlet-name>
         <url-pattern>/command/checkArea</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>getPoints</servlet-name>
+        <servlet-class>com.example.demo.GetPointsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getPoints</servlet-name>
+        <url-pattern>command/getPoints</url-pattern>
+    </servlet-mapping>
 </web-app>

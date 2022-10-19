@@ -114,5 +114,6 @@
 </div>
 <form id="data" method="get" action="controller" target="_blank"></form>
 </body>
+<script src="/lab2/js/jquery-3.6.1.min.js"></script>
 <script src="/lab2/js/script.js"></script>
 </html>

@@ -16,6 +16,7 @@ public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String> query = parseQuerystring(req.getQueryString());
+        log(String.format("New request with this query params: %s", req.getQueryString()));
         PrintWriter writer = resp.getWriter();
         writer.write("<html>");
         writer.write("<body>");
@@ -25,7 +26,7 @@ public class AreaCheckServlet extends HttpServlet {
             float r = Float.parseFloat(query.get("r"));
             boolean result = CheckUtil.check(x, y, r);
             Results.CheckResult checkResult = new Results.CheckResult();
-            checkResult.setIn(Boolean.toString(result));
+            checkResult.setIn(result);
             checkResult.setR(r);
             checkResult.setX(x);
             checkResult.setY(y);
@@ -40,7 +41,7 @@ public class AreaCheckServlet extends HttpServlet {
                 float curX = currentResult.getX();
                 float curY = currentResult.getY();
                 float curR = currentResult.getR();
-                String curResult = currentResult.getIn();
+                boolean curResult = currentResult.getIn();
                 writer.write(String.format("<tr><td>%f</td><td>%f</td><td>%f</td><td>%s</td></tr>", curX, curY, curR, curResult));
             }
             writer.write("</table>");

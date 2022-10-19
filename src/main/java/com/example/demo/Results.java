@@ -1,11 +1,12 @@
 package com.example.demo;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Results {
-    private static final List<CheckResult> results = new LinkedList<>();
+    private static final List <CheckResult> results = Collections.synchronizedList(new LinkedList<>());
 
     public static List<CheckResult> getResults() {
         return results;
@@ -19,7 +20,7 @@ public class Results {
         private float x;
         private float y;
         private float r;
-        private String in;
+        private boolean in;
 
         public CheckResult(){}
 
@@ -36,11 +37,11 @@ public class Results {
             return y;
         }
 
-        public String getIn() {
+        public boolean getIn() {
             return in;
         }
 
-        public void setIn(String in) {
+        public void setIn(boolean in) {
             this.in = in;
         }
 
