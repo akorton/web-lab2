@@ -41,13 +41,13 @@ let draw = (r)=>{
     ctx.beginPath();
 };
 let drawRect = (r)=>{
-    ctx.fillRect(origin.x - r * steps.x / 2, origin.y, r*steps.x / 2, r*steps.y);
+    ctx.fillRect(origin.x, origin.y, r*steps.x, r*steps.y);
 }
 let drawTriangle = (r)=>{
     ctx.beginPath();
     ctx.moveTo(origin.x, origin.y);
-    ctx.lineTo(origin.x, origin.y - r * steps.y / 2);
-    ctx.lineTo(origin.x + r * steps.x, origin.y);
+    ctx.lineTo(origin.x - r*steps.x / 2, origin.y);
+    ctx.lineTo(origin.x, origin.y - r*steps.y / 2);
     ctx.closePath();
     ctx.fill();
 }
@@ -55,7 +55,7 @@ let drawTriangle = (r)=>{
 let drawQuaterCircle = (r)=>{
     ctx.beginPath();
     ctx.moveTo(origin.x, origin.y);
-    ctx.arc(origin.x, origin.y, r*steps.x, Math.PI, Math.PI * 3 / 2);
+    ctx.arc(origin.x, origin.y, r*steps.x/2, Math.PI * 3/2, 0);
     ctx.fill();
 }
 
