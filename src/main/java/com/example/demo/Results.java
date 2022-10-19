@@ -1,27 +1,29 @@
 package com.example.demo;
 
+import com.sun.tools.javac.comp.Check;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Results {
-    private static final List<checkResult> results = new LinkedList<>();
+    private static final List<CheckResult> results = new LinkedList<>();
 
-    public static List<checkResult> getResults() {
+    public static List<CheckResult> getResults() {
         return results;
     }
 
-    public static void addCheckResult(checkResult result){
+    public static void addCheckResult(CheckResult result){
         results.add(result);
     }
 
-    public static class checkResult implements Serializable {
+    public static class CheckResult implements Serializable {
         private float x;
         private float y;
         private float r;
         private String in;
 
-        public checkResult(){};
+        public CheckResult(){}
 
 
         public float getR() {

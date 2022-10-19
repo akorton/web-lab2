@@ -22,8 +22,13 @@ public class AreaCheckServlet extends HttpServlet {
             float x = Float.parseFloat(query.get("x"));
             float y = Float.parseFloat(query.get("y"));
             float r = Float.parseFloat(query.get("r"));
-            boolean checkResult = CheckUtil.check(x, y, r);
-
+            boolean result = CheckUtil.check(x, y, r);
+            Results.CheckResult checkResult = new Results.CheckResult();
+            checkResult.setIn(Boolean.toString(result));
+            checkResult.setR(r);
+            checkResult.setX(x);
+            checkResult.setY(y);
+            Results.addCheckResult(checkResult);
         } catch (NumberFormatException | NullPointerException e) {
             writer.write("Invalid arguments.");
         } finally {
