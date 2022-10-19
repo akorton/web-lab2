@@ -80,7 +80,7 @@ yButton.addEventListener('input', (e)=>{
     if (Number.isNaN(integerValue) && yButton.value != '-'){
         yButton.value = yButton.value.substring(0, yButton.value.length - 1);
     }
-    else if (integerValue > 3 || integerValue < -3){
+    else if (integerValue > 5 || integerValue < -5){
         yButton.value = yButton.value.substring(0, yButton.value.length - 1);
     }
     if (yButton.value != '-') {
