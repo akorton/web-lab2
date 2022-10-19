@@ -3,7 +3,7 @@ package com.example.demo;
 public class CheckUtil {
 
     public static boolean check(float x, float y, float r){
-        return checkTriangle(x, y, r) && checkSquare(x, y, r) && checkQuarterCircle(x, y, r);
+        return checkTriangle(x, y, r) || checkSquare(x, y, r) || checkQuarterCircle(x, y, r);
     }
 
     private static boolean checkTriangle(float x, float y, float r){

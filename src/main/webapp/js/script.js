@@ -10,7 +10,7 @@ const offsetY = 10;
 const pointSize = 5;
 const steps = {'x': (width - offsetX) / (2*maxCoord), 'y': (height - offsetY) / (2*maxCoord)};
 const origin = {'x': offsetX / 2 + maxCoord * steps['x'], 'y': offsetY / 2 + maxCoord * steps['y']};
-const radiusButtons = document.getElementsByName('radius');
+const radiusButtons = document.getElementsByName('r');
 const yButton = document.getElementById('y');
 const xSelect = document.getElementById('x_select');
 let x = 0;
@@ -89,6 +89,27 @@ xSelect.addEventListener("change", (e)=>{
             x = +option.value;
             drawPoint(x, y);
         }
+    }
+})
+
+canvas.addEventListener("click", (e)=>{
+    let canvasX = e.offsetX;
+    let canvasY = e.offsetY;
+    let realX = (canvasX - origin.x) / steps.x;
+    let realY = -(canvasY - origin.y) / steps.y;
+    if (realY <= 5 && realY >= -5) {
+        let form = document.getElementById("data");
+        yButton.value = realY;
+        let child = document.createElement("option");
+        child.value = realX;
+        child.hidden = true;
+        child.selected = true;
+        xSelect.appendChild(child);
+        drawPoint(realX, y);
+        form.submit();
+        xSelect.removeChild(child);
+    } else {
+        alert("Invalid y value");
     }
 })
 
