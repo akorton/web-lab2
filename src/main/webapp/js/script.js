@@ -28,7 +28,7 @@ let setUp = ()=>{
 
 let getValidHref = (toAdd)=>{
     let current = window.location.href.split("/");
-    return [...current.slice(0, current.indexOf("lab2" + 1)), toAdd].join("/");
+    return current.slice(0, current.indexOf("lab2" + 1)).join("/") + toAdd;
 }
 
 let draw = (r)=>{
@@ -69,7 +69,6 @@ let drawPoint = (x, y, checkResult)=>{
 };
 
 let drawPoints = ()=>{
-    console.log(points);
     draw(r);
     for (let point of points){
         drawPoint(point.x, point.y, point.in);
@@ -107,7 +106,7 @@ let addToTable = ()=>{
 
 let getPoints = async ()=>{
     return $.ajax({
-        url: getValidHref("command/getPoints"),
+        url: getValidHref("/controller?getPoints"),
         method: "get",
         success: (data)=>{
             points =  JSON.parse(data);
