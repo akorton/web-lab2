@@ -133,7 +133,7 @@ yButton.addEventListener('input', (e)=>{
     if (Number.isNaN(integerValue) && yButton.value != '-'){
         yButton.value = yButton.value.substring(0, yButton.value.length - 1);
     }
-    else if (integerValue > 5 || integerValue < -5){
+    else if (integerValue > 5 || integerValue < -5 || yButton.value.length > 10){
         yButton.value = yButton.value.substring(0, yButton.value.length - 1);
     }
     if (yButton.value != '-') {
@@ -166,7 +166,8 @@ canvas.addEventListener("click", async (e) => {
         xSelect.appendChild(child);
         form.submit();
         xSelect.removeChild(child);
-        await getPoints();
+        yButton.value = 0;
+        x = -2;
     } else {
         alert("Invalid y value");
     }
@@ -174,4 +175,4 @@ canvas.addEventListener("click", async (e) => {
 drawPoints();
 setInterval(async () => {
     await getPoints();
-}, 2000);
+}, 400);
