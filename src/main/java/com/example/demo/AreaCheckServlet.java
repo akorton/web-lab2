@@ -25,7 +25,8 @@ public class AreaCheckServlet extends HttpServlet {
                 String trimmedX = query.get("x").substring(0, Math.min(10, query.get("x").length()));
                 String trimmedY = query.get("y").substring(0, Math.min(10, query.get("y").length()));
                 String trimmedR = query.get("r").substring(0, Math.min(10, query.get("r").length()));
-                req.getRequestDispatcher(String.format("/controller?x=%s&y=%s&r=%s", trimmedX, trimmedY, trimmedR)).forward(req, resp);
+//                req.getRequestDispatcher(String.format("/controller?x=%s&y=%s&r=%s", trimmedX, trimmedY, trimmedR)).forward(req, resp);
+                resp.sendRedirect(String.format("/lab2/controller?x=%s&y=%s&r=%s", trimmedX, trimmedY, trimmedR));
                 return;
             }
             float x = Float.parseFloat(query.get("x"));
