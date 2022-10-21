@@ -17,15 +17,11 @@ public class AreaCheckServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String> query = parseQuerystring(req.getQueryString());
         log(String.format("New request with this query params: %s", req.getQueryString()));
-        PrintWriter writer = resp.getWriter();
-        writer.write("<html>");
-        writer.write("<body>");
         try{
             if (query.get("x").length() > 10 || query.get("y").length() > 10 || query.get("r").length() > 10){
                 String trimmedX = query.get("x").substring(0, Math.min(10, query.get("x").length()));
                 String trimmedY = query.get("y").substring(0, Math.min(10, query.get("y").length()));
                 String trimmedR = query.get("r").substring(0, Math.min(10, query.get("r").length()));
-//                req.getRequestDispatcher(String.format("/controller?x=%s&y=%s&r=%s", trimmedX, trimmedY, trimmedR)).forward(req, resp);
                 resp.sendRedirect(String.format("/lab2/controller?x=%s&y=%s&r=%s", trimmedX, trimmedY, trimmedR));
                 return;
             }
@@ -39,30 +35,9 @@ public class AreaCheckServlet extends HttpServlet {
             checkResult.setX(x);
             checkResult.setY(y);
             Results.addCheckResult(checkResult);
-            List<Results.CheckResult> results = Results.getResults();
-            writer.write("<table align=\"center\" cellpadding=\"5\" cellspacing=\"10\" border=\"2\" width=\"100%\">");
-            writer.write(" <tr>\n" +
-                    "                <td colspan=\"4\" align=\"right\"><button onclick=\"redirectToMainPage()\">Back</button></td>\n" +
-                    "            </tr>");
-            writer.write("<tr><th>X</th><th>Y</th><th>R</th><th>Result</th></tr>");
-            for (Results.CheckResult currentResult: results){
-                float curX = currentResult.getX();
-                float curY = currentResult.getY();
-                float curR = currentResult.getR();
-                boolean curResult = currentResult.getIn();
-                writer.write(String.format("<tr><td>%f</td><td>%f</td><td>%f</td><td>%s</td></tr>", curX, curY, curR, curResult));
-            }
-            writer.write("</table>");
+            req.getRequestDispatcher("table.jsp").forward(req, resp);
         } catch (NumberFormatException | NullPointerException e) {
-            writer.write("Invalid arguments.");
-        } finally {
-            writer.write("</body>");
-            writer.write("</html>");
-            writer.write("<script>let redirectToMainPage = ()=>{\n" +
-                    "let hrefArray = window.location.href.split('/');\n" +
-                    "let newArray = [...hrefArray.splice(0, hrefArray.indexOf('lab2')+1), 'controller'];" +
-                    "        window.location.href = newArray.join(\"/\");\n" +
-                    "    }</script>");
+
         }
     }
 

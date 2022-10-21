@@ -14,7 +14,7 @@ public class ControllerServlet extends HttpServlet {
             request.getRequestDispatcher("/hello/index.jsp").forward(request, response);
         else{
             if (request.getQueryString().equals("getPoints")) request.getRequestDispatcher("/command/getPoints").forward(request, response);
-            else request.getRequestDispatcher("/command/checkArea").forward(request, response);
+            else request.getRequestDispatcher("/command/checkArea/").forward(request, response);
         }
     }
 }
