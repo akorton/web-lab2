@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AreaCheckServlet extends HttpServlet {
-    private static final List<Float> possibleR = Arrays.asList(1f, 1.5f, 2f, 2.5f, 3f);
+    private static final List<Double> possibleR = Arrays.asList(1d, 1.5, 2d, 2.5, 3d);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String> query = parseQuerystring(req.getQueryString());
@@ -26,9 +26,9 @@ public class AreaCheckServlet extends HttpServlet {
                 resp.sendRedirect(String.format("/lab2/controller?x=%s&y=%s&r=%s", trimmedX, trimmedY, trimmedR));
                 return;
             }
-            float x = Float.parseFloat(query.get("x"));
-            float y = Float.parseFloat(query.get("y"));
-            float r = Float.parseFloat(query.get("r"));
+            double x = Double.parseDouble(query.get("x"));
+            double y = Double.parseDouble(query.get("y"));
+            double r = Double.parseDouble(query.get("r"));
             if (!(y < -5 || y > 5 || !possibleR.contains(r))) {
                 boolean result = CheckUtil.check(x, y, r);
                 Results.CheckResult checkResult = new Results.CheckResult();

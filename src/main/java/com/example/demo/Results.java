@@ -17,23 +17,23 @@ public class Results {
     }
 
     public static class CheckResult implements Serializable {
-        private float x;
-        private float y;
-        private float r;
+        private double x;
+        private double y;
+        private double r;
         private boolean in;
 
         public CheckResult(){}
 
 
-        public float getR() {
+        public double getR() {
             return r;
         }
 
-        public float getX() {
+        public double getX() {
             return x;
         }
 
-        public float getY() {
+        public double getY() {
             return y;
         }
 
@@ -45,15 +45,15 @@ public class Results {
             this.in = in;
         }
 
-        public void setR(float r) {
+        public void setR(double r) {
             this.r = r;
         }
 
-        public void setX(float x) {
+        public void setX(double x) {
             this.x = x;
         }
 
-        public void setY(float y) {
+        public void setY(double y) {
             this.y = y;
         }
     }
