@@ -21,6 +21,13 @@ public class AreaCheckServlet extends HttpServlet {
         writer.write("<html>");
         writer.write("<body>");
         try{
+            if (query.get("x").length() > 10 || query.get("y").length() > 10 || query.get("r").length() > 10){
+                String trimmedX = query.get("x").substring(0, Math.min(10, query.get("x").length()));
+                String trimmedY = query.get("y").substring(0, Math.min(10, query.get("y").length()));
+                String trimmedR = query.get("r").substring(0, Math.min(10, query.get("r").length()));
+                req.getRequestDispatcher(String.format("/controller?x=%s&y=%s&r=%s", trimmedX, trimmedY, trimmedR)).forward(req, resp);
+                return;
+            }
             float x = Float.parseFloat(query.get("x"));
             float y = Float.parseFloat(query.get("y"));
             float r = Float.parseFloat(query.get("r"));
