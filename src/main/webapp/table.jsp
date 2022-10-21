@@ -2,6 +2,7 @@
 <%@ page contentType="text/html; UTF-8" %>
 <html>
     <head>
+        <title>AreaCheck</title>
         <style>
             #back{
                 display: flex;

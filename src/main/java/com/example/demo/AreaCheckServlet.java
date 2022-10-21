@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AreaCheckServlet extends HttpServlet {
-
+    private static final List<Float> possibleR = Arrays.asList(1f, 1.5f, 2f, 2.5f, 3f);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String> query = parseQuerystring(req.getQueryString());
@@ -28,13 +29,15 @@ public class AreaCheckServlet extends HttpServlet {
             float x = Float.parseFloat(query.get("x"));
             float y = Float.parseFloat(query.get("y"));
             float r = Float.parseFloat(query.get("r"));
-            boolean result = CheckUtil.check(x, y, r);
-            Results.CheckResult checkResult = new Results.CheckResult();
-            checkResult.setIn(result);
-            checkResult.setR(r);
-            checkResult.setX(x);
-            checkResult.setY(y);
-            Results.addCheckResult(checkResult);
+            if (!(y < -5 || y > 5 || !possibleR.contains(r))) {
+                boolean result = CheckUtil.check(x, y, r);
+                Results.CheckResult checkResult = new Results.CheckResult();
+                checkResult.setIn(result);
+                checkResult.setR(r);
+                checkResult.setX(x);
+                checkResult.setY(y);
+                Results.addCheckResult(checkResult);
+            }
             req.getRequestDispatcher("table.jsp").forward(req, resp);
         } catch (NumberFormatException | NullPointerException e) {
 
