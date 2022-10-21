@@ -13,6 +13,7 @@ const origin = {'x': offsetX / 2 + maxCoord * steps['x'], 'y': offsetY / 2 + max
 const radiusButtons = document.getElementsByName('r');
 const yButton = $('#y')[0];
 const xSelect = $('#x_select')[0];
+const submitButton = $("#submit")[0];
 let x = 0;
 let y = 0;
 let r = 1;
@@ -105,7 +106,7 @@ let addToTable = ()=>{
 }
 
 let getPoints = async ()=>{
-    return $.ajax({
+    $.ajax({
         url: getValidHref("/controller?getPoints"),
         method: "get",
         success: (data)=>{
@@ -163,15 +164,19 @@ canvas.addEventListener("click", async (e) => {
         child.hidden = true;
         child.selected = true;
         xSelect.appendChild(child);
-        form.submit();
+        form.submit.click();
         xSelect.removeChild(child);
         yButton.value = 0;
         x = -2;
+        setTimeout(()=>getPoints, 400);
     } else {
         alert("Invalid y value");
     }
 });
-drawPoints();
+submitButton.addEventListener("click", (e)=>{
+    setTimeout(()=>getPoints(), 400);
+})
+getPoints();
 setInterval(async () => {
     await getPoints();
-}, 400);
+}, 5000);

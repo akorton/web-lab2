@@ -107,7 +107,7 @@
                 <input type="radio" name="r" id="r5" form="data" value="3"><label for="r5">3</label>
         </div>
         <div>
-            <button type="submit" form="data">Submit</button>
+            <button type="submit" form="data" id="submit">Submit</button>
         </div>
     </div>
     <div class="footer"></div>
